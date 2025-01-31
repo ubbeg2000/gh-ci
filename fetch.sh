@@ -1,3 +1,5 @@
+action_script=$1
+
 latest=$(cat latest.txt)
 latest_ts=$(date -j -f "%Y-%m-%dT%H:%M:%SZ" "$latest" +%s)
 
@@ -12,7 +14,8 @@ date=$(echo $date | cut -d ' ' -f 1)
 commit_ts=$(date -j -f "%Y-%m-%dT%H:%M:%SZ" "$date" +%s)
 
 if [ $latest_ts -lt $commit_ts ]; then
-    echo "ada yang baru nich"
+  echo "Newer commits exists"
+  source $action_script
 else
-    echo "pler"
+  echo "Current version is up to date"
 fi
